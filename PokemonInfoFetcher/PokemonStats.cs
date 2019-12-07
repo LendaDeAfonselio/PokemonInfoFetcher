@@ -1,4 +1,6 @@
-﻿namespace PokemonInfoFetcher
+﻿using PokeAPI;
+
+namespace PokemonInfoFetcher
 {
     public class PokemonStats
     {

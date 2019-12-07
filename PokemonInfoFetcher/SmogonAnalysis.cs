@@ -2,7 +2,7 @@
 
 namespace PokemonInfoFetcher
 {
-    public class SmogonAnalysis
+    public class SmogonAnalyse
     {
         public string Format { get; set; }
         public string Overview { get; set; }
