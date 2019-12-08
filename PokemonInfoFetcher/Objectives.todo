@@ -1,8 +1,9 @@
 ✔ Treat information from PokeAPI @started(19-12-07 16:03) @done(19-12-07 20:26) @lasted(4h23m21s)
 ✔ Merge information from PokeAPI and Smogon @started(19-12-07 16:03) @done(19-12-07 20:26) @lasted(4h23m21s)
-☐ Generalize URL @started(19-12-07 20:26)
-☐ Receive user input
+✔ Generalize URL @started(19-12-07 20:26) @done(19-12-07 20:57) @lasted(31m53s)
+☐ Receive user input @started(19-12-08 23:22)
 ☐ Get description for ablities
 ☐ Incorporate rest of the utitilies (berries, items, etc)
 ☐ Find a way to have output
 ☐ Generalize for generation
+☐ Put loggers

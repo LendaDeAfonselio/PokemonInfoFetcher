@@ -52,8 +52,18 @@ namespace PokemonInfoFetcher
             List<JToken> resultList = new List<JToken>();
             FindPropertyInJToken(jsonFromHtml, "strategies", resultList);
 
+
+
             // get contents and transform them into custom c# objects
-            var strategiesContent = resultList[0].Children<JObject>();
+            var strategiesContent = resultList.FirstOrDefault()?.Children<JObject>()
+                ?? throw new NoSmogonDataException($"No smogon data for Sword and Shield for pokemon {pokemonName}");
+
+            if (strategiesContent.Count() == 0)
+            {
+                throw new NoSmogonDataException($"No smogon data for Sword and Shield for pokemon {pokemonName}");
+            }
+
+
             List<SmogonAnalyse> result = strategiesContent.Select(p => JsonConvert.DeserializeObject<SmogonAnalyse>(p.ToString())).ToList();
 
             // merge the information
