@@ -8,23 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PokemonInfoFetcher;
-
+using PokemonInfoFetcher.Domain;
 
 namespace PokemonInfoWF
 {
     public partial class Form1 : Form
     {
+        PokemonInfoFetcherService _pokemonInforFetcherService;
         public Form1()
         {
             InitializeComponent();
-
-
+            _pokemonInforFetcherService = new PokemonInfoFetcherService();
         }
-
-        #region Ordo.comon
-        // some trash India™ 
-        #endregion
-
 
         #region events
         /// <summary>
@@ -34,14 +29,26 @@ namespace PokemonInfoWF
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             PopulateDatagrid(null);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private async void label2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var x = await _pokemonInforFetcherService.GetPokemonInformationAsync(598);
+                Console.WriteLine("");
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+            
         }
+
+
 
         #endregion
 
@@ -58,6 +65,6 @@ namespace PokemonInfoWF
 
         #endregion
 
-        
+
     }
 }
