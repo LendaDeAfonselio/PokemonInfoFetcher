@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace PokemonInfoFetcher
 {
-    public class PokemonInfoFetcherService
+    public class PokemonInfoFetcherService : IPokemonInfoFetcherService
     {
         private readonly string _smogonSwordAndShieldPath = "https://www.smogon.com/dex/ss/pokemon/";
+        /// </inheritdoc>
         public async Task<PokemonInformation> GetPokemonInformationAsync(int pokedexNumber)
         {
             // get information from the API
@@ -26,6 +27,7 @@ namespace PokemonInfoFetcher
             return await GetSmogonInformationAndMergeItAsync(pokemonName, pokemonSpecies, pokemon);
         }
 
+        /// </inheritdoc>
         public async Task<PokemonInformation> GetPokemonInformationAsync(string pokemonName)
         {
             // because both the api and smogon use lower case
