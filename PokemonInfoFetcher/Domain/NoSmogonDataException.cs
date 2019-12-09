@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace PokemonInfoFetcher
+namespace PokemonInfoFetcher.Domain
 {
     [Serializable]
     internal class NoSmogonDataException : Exception

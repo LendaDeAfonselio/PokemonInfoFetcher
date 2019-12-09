@@ -1,6 +1,6 @@
 ﻿using PokeAPI;
 
-namespace PokemonInfoFetcher
+namespace PokemonInfoFetcher.Domain
 {
     public class PokemonStats
     {

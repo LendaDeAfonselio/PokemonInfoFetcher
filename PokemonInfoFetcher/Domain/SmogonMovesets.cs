@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PokemonInfoFetcher
+namespace PokemonInfoFetcher.Domain
 {
     public class SmogonMovesets
     {

@@ -1,7 +1,7 @@
 ﻿using PokeAPI;
 using System.Collections.Generic;
 
-namespace PokemonInfoFetcher
+namespace PokemonInfoFetcher.Domain
 {
     public class PokemonInformation
     {
@@ -10,7 +10,7 @@ namespace PokemonInfoFetcher
         public int BaseExperience { get; set; }
         public PokemonStats BaseStats { get; set; }
         public PokemonType PrimaryType { get; set; }
-        public PokemonType? SecondaryType { get; set; }
+        public PokemonType SecondaryType { get; set; }
         public EvolutionChain EvolutionChain { get; set; }
         public Generation Generation { get; set; }
         public int HatchCounter { get; set; }
