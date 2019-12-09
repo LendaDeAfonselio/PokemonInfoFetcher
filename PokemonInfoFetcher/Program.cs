@@ -1,14 +1,27 @@
-﻿using PokemonInfoFetcher.Domain;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using PokemonInfoFetcher.Domain;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PokemonInfoFetcher
 {
-    public static class Program
+    public class Program
     {
         static async Task Main(string[] args)
         {
+            IServiceCollection services = new ServiceCollection();
+            // Startup.cs finally :)
+            Startup startup = new Startup();
+            startup.ConfigureServices(services);
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            var logger = serviceProvider.GetService<ILoggerFactory>()
+                                        .CreateLogger<Program>();
+
+            IPokemonInfoFetcherService pokemonInforFetcherService = serviceProvider.GetService<IPokemonInfoFetcherService>();
+
             Console.WriteLine("Welcome to PokemonInfoFetcher!");
 
             // add option to receive user input
@@ -21,7 +34,6 @@ namespace PokemonInfoFetcher
                 bool isNumeric = int.TryParse(input, out int pokedexNumber);
 
                 // handle exceptions
-                PokemonInfoFetcherService pokemonInforFetcherService = new PokemonInfoFetcherService();
                 PokemonInformation result;
                 try
                 {
@@ -36,13 +48,12 @@ namespace PokemonInfoFetcher
                 }
                 catch (HttpRequestException)
                 {
-                    Console.WriteLine("Poke API does not have for that pokemon, currently only information up to gen 7 is available");
+                    logger.LogError("Poke API does not have for that pokemon, currently only information up to gen 7 is available");
                 }
                 catch (NoSmogonDataException e)
                 {
-                    Console.WriteLine(e.Message);
+                    logger.LogError(e.Message);
                 }
-
             }
         }
     }
