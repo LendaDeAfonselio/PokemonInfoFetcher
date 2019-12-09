@@ -20,6 +20,8 @@ namespace PokemonInfoFetcher
             var logger = serviceProvider.GetService<ILoggerFactory>()
                                         .CreateLogger<Program>();
 
+            IPokemonInfoFetcherService pokemonInforFetcherService = serviceProvider.GetService<IPokemonInfoFetcherService>();
+
             Console.WriteLine("Welcome to PokemonInfoFetcher!");
 
             // add option to receive user input
@@ -32,7 +34,6 @@ namespace PokemonInfoFetcher
                 bool isNumeric = int.TryParse(input, out int pokedexNumber);
 
                 // handle exceptions
-                PokemonInfoFetcherService pokemonInforFetcherService = new PokemonInfoFetcherService();
                 PokemonInformation result;
                 try
                 {

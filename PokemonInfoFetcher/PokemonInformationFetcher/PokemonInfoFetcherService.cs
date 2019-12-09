@@ -1,8 +1,10 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PokeAPI;
 using PokemonInfoFetcher.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -14,9 +16,17 @@ namespace PokemonInfoFetcher
     public class PokemonInfoFetcherService : IPokemonInfoFetcherService
     {
         private readonly string _smogonSwordAndShieldPath = "https://www.smogon.com/dex/ss/pokemon/";
+        private readonly ILogger<PokemonInfoFetcherService> _logger;
+
+        public PokemonInfoFetcherService(ILogger<PokemonInfoFetcherService> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
         /// </inheritdoc>
         public async Task<PokemonInformation> GetPokemonInformationAsync(int pokedexNumber)
         {
+            _logger.LogDebug($"Fetching data using the pokedex number");
             // get information from the API
             PokemonSpecies pokemonSpecies = await DataFetcher.GetApiObject<PokemonSpecies>(pokedexNumber);
             Pokemon pokemon = await DataFetcher.GetApiObject<Pokemon>(pokedexNumber);
@@ -30,6 +40,8 @@ namespace PokemonInfoFetcher
         /// </inheritdoc>
         public async Task<PokemonInformation> GetPokemonInformationAsync(string pokemonName)
         {
+            _logger.LogDebug($"Fetching data using the Pokemon's name");
+
             // because both the api and smogon use lower case
             pokemonName = pokemonName.ToLower();
 
@@ -42,8 +54,11 @@ namespace PokemonInfoFetcher
 
         private async Task<PokemonInformation> GetSmogonInformationAndMergeItAsync(string pokemonName, PokemonSpecies pokemonSpecies, Pokemon pokemon)
         {
+            _logger.LogInformation($"Gethering data for {pokemonName}");
+
             // make an URL for smogon Sword and Shield data
             string url = $"{_smogonSwordAndShieldPath}+{pokemonName}";
+            _logger.LogDebug($"Getting smogon competitive sugestion from:\n{url}");
 
             // get the essencial of HTML
             string headlineText = await ExtractAndParseSmogonData(url);
