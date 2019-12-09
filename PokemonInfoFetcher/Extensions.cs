@@ -1,4 +1,6 @@
-﻿namespace PokemonInfoFetcher
+﻿using PokemonInfoFetcher.Domain;
+
+namespace PokemonInfoFetcher
 {
     public static class Extensions
     {
