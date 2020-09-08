@@ -1,5 +1,7 @@
 # Pokemon Info Fetcher
 
+The current version is deprecated, for some reason the PokeAPI wrapping isn't working anymore.
+
 ### Introduction 
 This a very simple application that allows you to easily get information about Pokemon and their most up to date competitive moveset (according to Smogon) as well as information about their types, breading, etc..  
 **Objective**:  
